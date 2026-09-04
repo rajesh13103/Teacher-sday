@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Happy Teachers' Day, Madam</title>
+
+<!-- Google Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- Grain / noise overlay -->
+<div class="grain-overlay" aria-hidden="true"></div>
+
+<!-- Ambient background canvas layers -->
+<div class="ambient-bg" aria-hidden="true">
+  <div class="ambient-glow ambient-glow--one"></div>
+  <div class="ambient-glow ambient-glow--two"></div>
+</div>
+
+<!-- Particle & petal containers (populated by JS) -->
+<div class="particle-field" id="particleField" aria-hidden="true"></div>
+<div class="petal-field" id="petalField" aria-hidden="true"></div>
+
+<!-- Mouse-follow glow (desktop only) -->
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+<!-- Section progress indicator -->
+<nav class="section-indicator" id="sectionIndicator" aria-label="Section progress">
+  <span class="dot" data-target="opening"></span>
+  <span class="dot" data-target="teacher"></span>
+  <span class="dot" data-target="coding"></span>
+  <span class="dot" data-target="research"></span>
+  <span class="dot" data-target="pause"></span>
+  <span class="dot" data-target="gratitude"></span>
+  <span class="dot" data-target="reveal"></span>
+  <span class="dot" data-target="final"></span>
+</nav>
+
+<!-- Floating music control -->
+<button class="music-control" id="musicControl" aria-label="Play music" aria-pressed="false">
+  <span class="music-control__bars" aria-hidden="true">
+    <i></i><i></i><i></i>
+  </span>
+ 
+</button>
+
+<!--
+  Place your background music file here as: music.mp3
+  (in the same folder as this index.html)
+  The site works perfectly fine without it.
+-->
+
+
+
+<!-- ============ SCREEN 0 — OPENING ============ -->
+<section class="screen opening-screen" id="opening">
+  <div class="opening-content">
+    <p class="opening-line">I made something special for a my coding teacher&hellip;</p>
+    <button class="start-button" id="startButton">
+      <span class="start-button__ring"></span>
+      <span class="start-button__text">Tap to begin <span class="sparkle">✨</span></span>
+    </button>
+  </div>
+</section>
+
+
+<main id="mainExperience" class="main-experience" hidden>
+
+  <!-- ============ PART ONE — A NEW TEACHER ============ -->
+  <section class="screen story-section" id="teacher" data-theme="teacher">
+    <div class="section-inner">
+      <div class="academic-scene" aria-hidden="true">
+        <span class="float-item float-item--book">📖</span>
+        <span class="float-item float-item--pencil">✎</span>
+        <span class="float-item float-item--symbol">Σ</span>
+        <span class="float-item float-item--symbol">π</span>
+        <span class="float-item float-item--code">&lt;/&gt;</span>
+        <span class="float-item float-item--dot"></span>
+        <span class="float-item float-item--dot"></span>
+      </div>
+
+      <h2 class="reveal-heading" data-reveal>Happy Teachers&rsquo; Day Deekshitha Madam <span class="tone-flower">🌸</span></h2>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>Sometimes, someone can enter our journey recently&hellip;</p>
+        <p data-reveal-line>&hellip;and still leave an unforgettable impact.</p>
+        <p class="emphasis-line" data-reveal-line>You are one of those teachers.</p>
+      </div>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>You may have joined recently&hellip;</p>
+        <p data-reveal-line>But the impact of your guidance has already become meaningful to me.</p>
+        <p data-reveal-line>And there is something very specific I want to thank you for.</p>
+      </div>
+
+      <button class="ghost-button" data-next="coding">Let me tell you&hellip;</button>
+    </div>
+  </section>
+
+
+  <!-- ============ PART TWO — CODING JOURNEY ============ -->
+  <section class="screen story-section" id="coding" data-theme="coding">
+    <div class="section-inner">
+      <div class="code-scene" aria-hidden="true">
+        <span class="float-item float-item--code">{ }</span>
+        <span class="float-item float-item--code">&lt;/&gt;</span>
+        <span class="float-item float-item--code">const</span>
+        <span class="float-item float-item--code">function</span>
+        <span class="float-item float-item--code">01</span>
+        <span class="float-item float-item--code">101</span>
+        <span class="digital-grid"></span>
+      </div>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>You didn&rsquo;t just teach me JAVA.</p>
+        <p class="emphasis-line" data-reveal-line>You made JAVA feel possible.</p>
+      </div>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>Every explanation&hellip;</p>
+        <p data-reveal-line>Every correction&hellip;</p>
+        <p data-reveal-line>Every small doubt you cleared&hellip;</p>
+        <p data-reveal-line>Every time you encouraged me to keep learning&hellip;</p>
+        <p data-reveal-line>They slowly changed the way I looked at programming.</p>
+      </div>
+
+      <!-- Typing code window -->
+      <div class="code-window" data-code-window>
+        <div class="code-window__bar">
+          <span></span><span></span><span></span>
+        </div>
+        <pre class="code-window__body"><code id="typedCode"></code><span class="code-cursor">|</span></pre>
+      </div>
+
+      <p class="reveal-single" data-reveal>Thank you for helping me become more confident with technology.</p>
+
+      <button class="ghost-button" data-next="research">But coding wasn&rsquo;t the biggest thing&hellip;</button>
+    </div>
+  </section>
+
+
+  <!-- ============ PART THREE — RESEARCH JOURNEY ============ -->
+  <section class="screen story-section" id="research" data-theme="research">
+    <div class="section-inner">
+      <div class="research-scene" aria-hidden="true">
+        <span class="float-item float-item--doc">📄</span>
+        <span class="float-item float-item--doc">📊</span>
+        <span class="float-item float-item--symbol">⌕</span>
+        <span class="graph-line"></span>
+        <span class="float-item float-item--dot"></span>
+        <span class="float-item float-item--dot"></span>
+      </div>
+
+      <p class="reveal-single" data-reveal>There was something else you encouraged me to do.</p>
+      <h2 class="glow-word" data-reveal>Research.</h2>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>You encouraged me to believe that I could do more than just learn.</p>
+        <p data-reveal-line>You encouraged me to explore.</p>
+        <p data-reveal-line>To question.</p>
+        <p data-reveal-line>To experiment.</p>
+        <p data-reveal-line>And to create something of my own.</p>
+      </div>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>Your encouragement gave me the confidence to work on my research paper.</p>
+        <p data-reveal-line>Whenever I felt unsure, your encouragement reminded me to keep going.</p>
+        <p class="emphasis-line" data-reveal-line>And that meant more to me than you may realize.</p>
+      </div>
+
+      <button class="ghost-button" data-next="pause">&hellip;</button>
+    </div>
+  </section>
+
+
+  <!-- ============ EMOTIONAL PAUSE ============ -->
+  <section class="screen pause-section" id="pause" data-theme="pause">
+    <div class="section-inner section-inner--narrow">
+      <div class="reveal-lines reveal-lines--slow" data-reveal-group>
+        <p data-reveal-line>A teacher&rsquo;s impact isn&rsquo;t always measured by how long they have taught us.</p>
+        <p data-reveal-line>Sometimes&hellip;</p>
+        <p data-reveal-line>it is measured by how much they make us believe in ourselves.</p>
+        <p class="emphasis-line emphasis-line--quiet" data-reveal-line>And you did that for me.</p>
+      </div>
+      <button class="ghost-button ghost-button--quiet" data-next="gratitude">Continue</button>
+    </div>
+  </section>
+
+
+  <!-- ============ PART FOUR — GRATITUDE ============ -->
+  <section class="screen story-section" id="gratitude" data-theme="gratitude">
+    <div class="section-inner">
+      <div class="petal-scene" aria-hidden="true"></div>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>So today, I don&rsquo;t just want to wish you&hellip;</p>
+        <p data-reveal-line>Happy Teachers&rsquo; Day.</p>
+        <p class="emphasis-line" data-reveal-line>I want to thank you.</p>
+      </div>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>Thank you for teaching me.</p>
+        <p data-reveal-line>Thank you for correcting me.</p>
+        <p data-reveal-line>Thank you for encouraging me.</p>
+        <p data-reveal-line>Thank you for believing that I could do better.</p>
+        <p data-reveal-line>Thank you for pushing me toward research.</p>
+        <p data-reveal-line>And thank you for being a teacher who genuinely inspires me.</p>
+      </div>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>Even though you joined recently&hellip;</p>
+        <p class="emphasis-line" data-reveal-line>&hellip;you have already become a memorable part of my learning journey.</p>
+      </div>
+
+      <button class="ghost-button" data-next="reveal">Continue</button>
+    </div>
+  </section>
+
+
+  <!-- ============ FINAL TEACHERS' DAY REVEAL ============ -->
+  <section class="screen reveal-section" id="reveal" data-theme="reveal">
+    <div class="reveal-burst" aria-hidden="true"></div>
+    <div class="section-inner">
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>Because some teachers&hellip;</p>
+        <p data-reveal-line>&hellip;teach us what is written in books.</p>
+        <p data-reveal-line>And some teachers&hellip;</p>
+        <p data-reveal-line>&hellip;teach us to believe in what we can become.</p>
+        <p class="emphasis-line" data-reveal-line>You have done both.</p>
+      </div>
+
+      <div class="glass-card hero-card" data-reveal>
+        <h1 class="hero-heading">Happy Teachers&rsquo; Day, Deekshitha Madam . </h1>
+      </div>
+
+      <button class="ghost-button" data-next="final">Continue</button>
+    </div>
+  </section>
+
+
+  <!-- ============ FINAL MESSAGE + QUOTE ============ -->
+  <section class="screen final-section" id="final" data-theme="final">
+    <div class="section-inner">
+
+      
+      <div class="closing-scene" aria-hidden="true"></div>
+
+      <div class="reveal-lines" data-reveal-group>
+        <p data-reveal-line>With lots of respect, gratitude &amp; appreciation </p>
+        <p class="emphasis-line" data-reveal-line>Happy Teachers&rsquo; Day, Deekshitha Madam!</p>
+        <p data-reveal-line>Thank you for being a part of my learning journey.</p>
+      </div>
+
+      <footer class="signature">
+        With heartfelt gratitude, Rajesh
+      </footer>
+    </div>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
